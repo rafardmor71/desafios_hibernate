@@ -1,10 +1,15 @@
 package com.example.desafio1Hibernate.entities;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +32,17 @@ public class Cliente {
 	
 	@Column(name="DNI", nullable = false, length = 9, unique = true)
 	private String DNI;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
+	private List<Contrato> listaContratos; 
+
+	public List<Contrato> getListaContratos() {
+		return listaContratos;
+	}
+
+	public void setListaContratos(List<Contrato> listaContratos) {
+		this.listaContratos = listaContratos;
+	}
 
 	public Long getId() {
 		return id;
